@@ -1,0 +1,13 @@
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lb{
+    padding:10px;
+}
+
+.btn{
+    width: 100px;
+}
