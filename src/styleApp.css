@@ -4,6 +4,10 @@ form{
     align-items: center;
 }
 
+.App {
+    font-family: sans-serif;
+}
+
 .lb{
     padding:10px;
 }
