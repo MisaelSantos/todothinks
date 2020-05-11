@@ -6,6 +6,10 @@ form{
 
 .App {
     font-family: sans-serif;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(57, 62, 70);
+    min-height: 500px;
 }
 
 .lb{
