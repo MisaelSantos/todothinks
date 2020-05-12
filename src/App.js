@@ -5,10 +5,11 @@ import './styleApp.css';
 
 function App(){
   const [{ values, loading }, handleChange, handleSubmit] = useForm();
+  
+  //tentei fazer, mas não deu, pois tive varios problemas com hooks, é complicado entender agora, é melhor fazer em class amanhã, gosta de dar commit, para ver meu progresso diário
 
   const enviarContato = () => {
-    // faça o que for preciso :)
-    console.log(values);
+    
   };
 
   return(
