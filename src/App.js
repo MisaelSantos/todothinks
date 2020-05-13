@@ -1,26 +1,50 @@
 import React from 'react';
 
-import useForm from "./hooks/useForm";
 import './styleApp.css';
 
-function App(){
-  const [{ values, loading }, handleChange, handleSubmit] = useForm();
-  
-  //tentei fazer, mas não deu, pois tive varios problemas com hooks, é complicado entender agora, é melhor fazer em class amanhã, gosta de dar commit, para ver meu progresso diário
+class App extends React.Component {
 
-  const enviarContato = () => {
-    
-  };
+  constructor(props) {
+    super(props);
 
-  return(
-    <div className="App">
-      <form onSubmit={handleSubmit(enviarContato)}>
-        <label className="lb">Adicionar pensamento do dia</label>
-        <textarea onChange={handleChange} name="name" id="" cols="30" rows="10"></textarea>
-        <button type="submit" className="btn">{loading ? "Enviando..." : "Enviar"}</button>
-      </form>
-    </div>
-  )
+    this.todos = [];
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.valuesLocalStorage = this.valuesLocalStorage.bind(this);
+
+    this.state = {
+      value: ''
+    }
+
+  }
+
+  handleChange(event) {
+    this.setState({
+      value: event.target.value
+    });
+  }
+
+  handleSubmit(event) {
+    this.todos.push(this.state.value);
+    localStorage.setItem('myValueInLocalStorage', JSON.stringify(this.todos));
+    event.preventDefault();
+  }
+
+  valuesLocalStorage() {
+    const data = JSON.parse(localStorage.getItem('myValueInLocalStorage')) || [];
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" value={this.state.value} className="thought" onChange={this.handleChange} />
+          <button onClick={this.valuesLocalStorage} className="btn">Finish</button>
+        </form>
+      </div>
+    )
+  }
 
 }
 
