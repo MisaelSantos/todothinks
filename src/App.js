@@ -7,32 +7,35 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.todos = [];
+    this.list = [];
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.valuesLocalStorage = this.valuesLocalStorage.bind(this);
 
     this.state = {
-      value: ''
+      value: [],
+      todos: []
     }
-
   }
 
   handleChange(event) {
     this.setState({
-      value: event.target.value
+      value: [event.target.value]
     });
   }
 
   handleSubmit(event) {
-    this.todos.push(this.state.value);
-    localStorage.setItem('myValueInLocalStorage', JSON.stringify(this.todos));
-    event.preventDefault();
-  }
 
-  valuesLocalStorage() {
-    const data = JSON.parse(localStorage.getItem('myValueInLocalStorage')) || [];
+
+    this.list.push(this.state.value);
+
+    localStorage.setItem('myValueInLocalStorage', JSON.stringify(this.list));
+
+    this.setState({
+      todos: JSON.parse(localStorage.getItem('myValueInLocalStorage')) || []
+    })
+
+    event.preventDefault();
   }
 
   render() {
@@ -40,9 +43,23 @@ class App extends React.Component {
       <div className="App">
         <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.value} className="thought" onChange={this.handleChange} />
-          <button onClick={this.valuesLocalStorage} className="btn">Finish</button>
+          <button className="btn">Finish</button>
         </form>
+
+        <ul>
+          {  
+            this.state.todos.map(item => {
+              return (
+                <li key={item.id}>
+                  {item}
+                </li>
+              )
+            })
+          }
+        </ul>
+
       </div>
+
     )
   }
 
