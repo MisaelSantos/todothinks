@@ -58,22 +58,25 @@ class App extends React.Component {
 
       <div className="App">
         <form onSubmit={this.handleSubmit}>
+          <label htmlFor="">PENSAMENTO</label>
           <textarea className="thought" value={this.state.value} cols="30" rows="10" onChange={this.handleChange}></textarea>
+          <br/>
           <button className="btn">Finish</button>
         </form>
 
-        <ul>
+        <div class = "divthinks">
           {
             this.state.todos.map((item, index) => {
               return (
-                <li key={index}>
+                <div key={index}>
                   {item}
-                  <button onClick={() => this.deleteItem(index)}>X</button>
-                </li>
+                  <br/>
+                  <button onClick={() => this.deleteItem(index)}>X</button>{' '}
+                </div>
               )
             })
           }
-        </ul>
+        </div>
 
       </div>
 
