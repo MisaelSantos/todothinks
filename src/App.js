@@ -26,13 +26,23 @@ class App extends React.Component {
   }
 
   handleSubmit(event) {
-     //<input type="text" value={this.state.value} className="thought" onChange={this.handleChange} />
+    //<input type="text" value={this.state.value} className="thought" onChange={this.handleChange} />
     event.preventDefault();
     if (this.state.value !== '') {
 
-      localStorage.setItem('myValueInLocalStorage', JSON.stringify([...this.state.todos, this.state.value]));
+      const now = new Date();
 
-      const addItem = [...this.state.todos, this.state.value];
+      const day = now.getDate(), mon = now.getMonth() + 1, year = now.getFullYear();
+
+      const hrs = now.getHours(), min = now.getMinutes(), sec = now.getSeconds();
+
+      console.log(typeof(day));
+
+      const addItem = [...this.state.todos, this.state.value + ((day > 9) ? day : '0' + day) + "/" + ((mon > 9) ? mon : '0' + mon) + "/" + year +
+        ' - ' + ((hrs > 9) ? hrs : '0' + hrs) + ":" + ((min > 9) ? min : '0' + min) + ':' + ((sec > 9) ? sec : '0' + sec)];
+
+      localStorage.setItem('myValueInLocalStorage', JSON.stringify(addItem));
+
       this.setState({
         value: '',
         todos: addItem
@@ -60,17 +70,17 @@ class App extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="">PENSAMENTO</label>
           <textarea className="thought" value={this.state.value} cols="30" rows="10" onChange={this.handleChange}></textarea>
-          <br/>
+          <br />
           <button className="btn">Finish</button>
         </form>
 
-        <div class = "divthinks">
+        <div class="divthinks">
           {
             this.state.todos.map((item, index) => {
               return (
                 <div key={index}>
                   {item}
-                  <br/>
+                  <br />
                   <button onClick={() => this.deleteItem(index)}>X</button>{' '}
                 </div>
               )
