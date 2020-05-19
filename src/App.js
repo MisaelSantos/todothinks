@@ -72,14 +72,13 @@ class App extends React.Component {
           <button className="btn">FINISH</button>
         </form>
 
-        <div className="divthinks">
+        <div className="divThinks">
           {
             this.state.todos.map((item, index) => {
               return (
-                <div key={index}>
+                <div onClick={() => this.deleteItem(index)} key={index}>
                   {item}
                   <br />
-                  <button onClick={() => this.deleteItem(index)}>X</button>{' '}
                 </div>
               )
             })
