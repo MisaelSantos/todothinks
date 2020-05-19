@@ -36,9 +36,7 @@ class App extends React.Component {
 
       const hrs = now.getHours(), min = now.getMinutes(), sec = now.getSeconds();
 
-      console.log(typeof(day));
-
-      const addItem = [...this.state.todos, this.state.value + ((day > 9) ? day : '0' + day) + "/" + ((mon > 9) ? mon : '0' + mon) + "/" + year +
+      const addItem = [...this.state.todos, this.state.value + ' ' + ((day > 9) ? day : '0' + day) + "/" + ((mon > 9) ? mon : '0' + mon) + "/" + year +
         ' - ' + ((hrs > 9) ? hrs : '0' + hrs) + ":" + ((min > 9) ? min : '0' + min) + ':' + ((sec > 9) ? sec : '0' + sec)];
 
       localStorage.setItem('myValueInLocalStorage', JSON.stringify(addItem));
@@ -68,13 +66,13 @@ class App extends React.Component {
 
       <div className="App">
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="">PENSAMENTO</label>
+          <label htmlFor="">THOUGHTS</label>
           <textarea className="thought" value={this.state.value} cols="30" rows="10" onChange={this.handleChange}></textarea>
-          <br />
-          <button className="btn">Finish</button>
+          <br/>
+          <button className="btn">FINISH</button>
         </form>
 
-        <div class="divthinks">
+        <div className="divthinks">
           {
             this.state.todos.map((item, index) => {
               return (
