@@ -36,8 +36,8 @@ class App extends React.Component {
 
       const hrs = now.getHours(), min = now.getMinutes(), sec = now.getSeconds();
 
-      const addItem = [...this.state.todos, this.state.value + ' ' + ((day > 9) ? day : '0' + day) + "/" + ((mon > 9) ? mon : '0' + mon) + "/" + year +
-        ' - ' + ((hrs > 9) ? hrs : '0' + hrs) + ":" + ((min > 9) ? min : '0' + min) + ':' + ((sec > 9) ? sec : '0' + sec)];
+      const addItem = [...this.state.todos, [[this.state.value], [((day > 9) ? day : '0' + day) + "/" + ((mon > 9) ? mon : '0' + mon) + "/" + year +
+        ' - ' + ((hrs > 9) ? hrs : '0' + hrs) + ":" + ((min > 9) ? min : '0' + min) + ':' + ((sec > 9) ? sec : '0' + sec)]]];
 
       localStorage.setItem('myValueInLocalStorage', JSON.stringify(addItem));
 
@@ -68,7 +68,7 @@ class App extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="">THOUGHTS</label>
           <textarea className="thought" value={this.state.value} cols="30" rows="10" onChange={this.handleChange}></textarea>
-          <br/>
+          <br />
           <button className="btn">FINISH</button>
         </form>
 
@@ -77,8 +77,9 @@ class App extends React.Component {
             this.state.todos.map((item, index) => {
               return (
                 <div onClick={() => this.deleteItem(index)} key={index}>
-                  {item}
-                  <br />
+                  {item[0]}
+                  <br/>
+                  <div>{item[1]}</div>
                 </div>
               )
             })
