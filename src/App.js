@@ -79,7 +79,7 @@ class App extends React.Component {
                 <div onClick={() => this.deleteItem(index)} key={index}>
                   {item[0]}
                   <br/>
-                  <div>{item[1]}</div>
+                  {item[1]}
                 </div>
               )
             })
